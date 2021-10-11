@@ -67,3 +67,14 @@ const creerProduit = async ( ) => {
 }
 
 creerProduit();
+
+// schema => comment le créer / role 
+// ajouter des valeurs dans la base de données 
+// lire récupérer des données 
+// modifier 
+// supprimer 
+
+// relation entre les tables 
+// 16h21 @ toute suite !! 
+
+// 09-query.js
