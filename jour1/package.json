@@ -1,0 +1,16 @@
+{
+  "name": "jour1",
+  "version": "1.0.0",
+  "description": "manipuler une base de données MongoDB",
+  "main": "00-start.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "mongoose": "^6.0.10"
+  }
+}
