@@ -1,4 +1,4 @@
-const { connect  } = require("mongoose");
+const { connect , Types } = require("mongoose");
 const Utilisateur = require("./09-model-utilisateur");
 require("dotenv").config();
 
@@ -15,10 +15,13 @@ connect( process.env.URLBDD , { useNewUrlParser : true } )
 async function modifierUtilisateur(id){
     // recherché dans la base de données éléments qui a l'id recherché
     // const utilisateurAModifier = await Utilisateur.findOne({ _id : id } )
+    // tester l'id donnée est un id valide => correspond au format id MongoDB
+    if(!Types.ObjectId.isValid( id )){
+        return console.log( `l'id ${id} n'est pas valide` );
+    }
     const utilisateurAModifier = await Utilisateur.findById( id );
-
     if(utilisateurAModifier){
-        // modifier et enresgistrer 
+        // modifier et enregistrer 
         try{
             utilisateurAModifier.nom = [];
             utilisateurAModifier.age = "un peu de texte" ;
@@ -34,6 +37,6 @@ async function modifierUtilisateur(id){
     return console.log(`aucun utilisateur n'a l'id ${id}`);
 }
 
-modifierUtilisateur("61642fd0a38bca96513d6625");
+modifierUtilisateur("toto");
 
 // UpdateFirst
