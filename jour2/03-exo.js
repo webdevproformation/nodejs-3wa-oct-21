@@ -4,7 +4,6 @@ require("dotenv").config();
 connect( process.env.URLBDD , {useNewUrlParser : true} )
         .then(() => { console.log("connexion effectuée à la base")})
         .catch(erreur => { console.error(new Error( erreur)) })
-
 const supprCommentaire = async (id) => {
     if(!Types.ObjectId.isValid(id)){
         return console.log("id incorrect")
