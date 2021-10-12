@@ -54,4 +54,30 @@ async function modifierUtilisateur(id){
         }
     }
 }
-modifierUtilisateur("61653fef75f67b2101bdd956")
+// modifierUtilisateur("61653fef75f67b2101bdd956")
+
+// Utilisateur.findByIdAndUpdate({ where }, { les champs à modifier },{ récupérer les modifications })
+
+async function modifierUtilisateur2(id){
+    // vérifier est ce que l'id donné est ObjectId correct 
+    if(!Types.ObjectId.isValid(id)){
+        return console.log("id incorrect");
+    }
+    try{
+        const resultat = await Utilisateur.findByIdAndUpdate( id , { $set : { profession : "toto" } } , { new : true }  )
+        console.log(resultat);
+        // SQL  insert => récupérer l'information id 
+        /**
+         * $stmt = $db->prepare("INSERT...");
+            $stmt->execute();
+            $id = $db->lastInsertId();
+         * 
+         */
+    }catch(erreur){
+        for(let item in erreur.errors){
+            console.log(erreur.errors[item].message)
+        }
+    }
+}
+
+modifierUtilisateur2("61653fef75f67b2101bdd956");
