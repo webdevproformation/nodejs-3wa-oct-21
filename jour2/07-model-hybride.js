@@ -43,3 +43,13 @@ async function update(){
 
 update();
 
+// bon café => 16h15 
+// express // api complète 
+// express / mongoose 
+
+// outil pour faire templating => pug 
+// authenfication connecter au préalable pour pouvoir modifier / supprimer des éléments dans votre base de données
+// session / cookie // token d'authentification 
+
+
+// 08-api.js
