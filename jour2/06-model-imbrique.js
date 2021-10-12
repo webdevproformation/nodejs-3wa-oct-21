@@ -71,6 +71,28 @@ async function deleteArticleAdmin(){
 
 deleteArticleAdmin()
 
+// cas pratique :
+// dans le fichier existant 
+// les utilisateurs vont pouvoir liker les articles que l'on créé
+
+// nom : chiffre / par défaut il vaut  0 / min 0 
+// dt : date / par défaut maintenant
+// ip : string / validation avancée 000.000.000.000  000.0.0.000
+
+// créer un nouvel article avec utilisateur et like 
+/**
+        titre : exo 6,
+        contenu : "lorem ipsum",
+        utilisateur : {
+            nom : "Béatrice",
+            role : "redacteur"
+        },
+        like : {
+            ip : "1.2.3.4"
+        }
+ */
+
+// modifier le nombre de like à 30 
 
 
 
