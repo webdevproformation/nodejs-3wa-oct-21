@@ -8,6 +8,28 @@ connect( process.env.BD_IMBRIQUEE , {useNewUrlParser : true} )
 
 // article qui sont créés par un utilisateur
 
+const schemaLike = new Schema({
+    nom : {
+        type : Number,
+        min : 0,
+        default : 0
+    },
+    ip : {
+        type : String,
+        validate : {
+            validator : (valeur) => {
+                const patternIp = /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/;
+                return patternIp.test(valeur);
+            },
+            message : "ip saisit n'est pas valide"
+        }
+    },
+    dt : {
+        type : Date,
+        default : Date.now 
+    }
+})
+
 const schemaUtilisateur = new Schema({
     nom : String,
     role : {
@@ -21,7 +43,8 @@ const schemaUtilisateur = new Schema({
 const schemaArticle = new Schema({
     titre : String ,
     contenu : String,
-    utilisateur : schemaUtilisateur // mettre le champ = Schema de l'utilisateur 
+    utilisateur : schemaUtilisateur, // mettre le champ = Schema de l'utilisateur 
+    like : schemaLike
 });
 
 const Article = model("articles", schemaArticle);
@@ -95,8 +118,34 @@ deleteArticleAdmin()
 // modifier le nombre de like à 30 
 
 
+async function creerArticleAvecUtilisateurEtLike(titre){
+    const article = {
+        titre ,
+        contenu : "lorem ipsum",
+        utilisateur : {
+            nom : "Béatrice",
+            role : "redacteur"
+        },
+        like : {
+            ip : "1.2.3.4"
+        }
+    }
+    const creer = new Article(article);
+    const resultat = await creer.save();
+    console.log(resultat);
+}
 
+// creerArticleAvecUtilisateurEtLike("article de Béatrice avec 0 like");
 
+// 61658a24834f2e122e5f7c28
+
+async function updateLike(id_article){
+
+    const resultat = await Article.updateOne({_id : id_article} , { $set : { "like.nom" : 30 } })
+    console.log(resultat)
+}
+
+updateLike("61658a24834f2e122e5f7c28")
 
 
 
