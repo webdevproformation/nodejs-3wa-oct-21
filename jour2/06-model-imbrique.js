@@ -147,5 +147,5 @@ async function updateLike(id_article){
 
 updateLike("61658a24834f2e122e5f7c28")
 
-
+// 07-model-hybride.js
 
