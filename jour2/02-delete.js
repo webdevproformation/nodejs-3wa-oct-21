@@ -32,3 +32,12 @@ async function supprUtilisateur(id){
     }
 }
 supprUtilisateur("61653fb63c1823d4a8f0c008");
+
+// cas pratique créer le fichier 03-exo.js
+// supprimer dans la base jour1 dans la collection commentaires
+// 1 enregistrement  de votre choix 
+
+// rdv 11h15 @ toute !! bon café !!
+// correction
+// SQL => jointure 
+// NoSQL => plusieurs manières de gérer ce cas de figure
