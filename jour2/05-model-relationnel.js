@@ -149,3 +149,5 @@ getAll();
 // approche hybride
 
 // bon appétit 14h00 @ toute suite !!! 
+
+// 06-model-imbrique.js
