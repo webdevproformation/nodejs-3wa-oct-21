@@ -15,7 +15,13 @@ const schemaArticle = new Schema({
     utilisateur : { // clé secondaire de la collection
         type : Schema.Types.ObjectId, // contient un ObjectId
         ref : "utilisateurs" // le nom de la table auquel ce champ est lié => ref est mot clé
-    }
+    },
+    commentaires : [
+        { 
+            type : Schema.Types.ObjectId,
+            ref : "commentaires"
+        }
+    ]
 });
 
 const Article = model("articles", schemaArticle);
@@ -30,6 +36,17 @@ const schemaUtilisateur = new Schema({
 });
 
 const Utilisateur = model("utilisateurs" , schemaUtilisateur);
+
+const schemaCommentaire = new Schema({
+    contenu : String,
+    date : {
+        type : Date ,
+        default : Date.now
+    }
+});
+
+const Commentaire = model("commentaires" , schemaCommentaire);
+
 
 // pour créer un article il faut D'ABORD créer un utilisateur 
 // un fois créé l'utilisateur => créer l'article 
@@ -72,7 +89,40 @@ async function getArticles (){
     console.log(resultat);
 }
 
-getArticles()
+//getArticles()
+
+async function createCommentaire( contenu ){
+    const resultat = await (new Commentaire({ contenu })).save()
+    console.log(resultat)
+}
+
+/* createCommentaire( "premier commentaire" );  61657841f59daf6c186788ed
+createCommentaire( "deuxième commentaire" );    61657841f59daf6c186788ee */
+
+async function createArticle( id_utilisateur , tabIdCommentaire){
+    const article = {
+        titre : "nouvel article",
+        contenu : "lorem ipsum",
+        utilisateur : id_utilisateur,
+        commentaires : tabIdCommentaire
+    }
+    const creer = new Article(article);
+    const resultat = await creer.save();
+    console.log(resultat);
+}
+
+//createArticle( "6165624d82b7a6eed8caeb00" , ["61657841f59daf6c186788ed", "61657841f59daf6c186788ee"])
+
+async function getAll(){
+    const liste = await Article.findById("616578dd591485d500c8426a")
+                               .populate("utilisateur" )
+                               .populate({
+                                   path : "commentaires",
+                                   select : { _id:0 , __v: 0}
+                               } );
+    console.log(liste);
+}
+getAll();
 
 // relation entre les tables / collections 
 // vous ne pouvez pas supprimer un utilisateur SI il est associé à une article 
@@ -80,3 +130,22 @@ getArticles()
 // 1 - 1
 // n - 1 => JOINTURE LEFT 
 
+// dans le fichier en cours 
+
+// ajouter une nouvelle propriété au schema article => commentaires tableau [ ObjectId ]
+
+// créer un schema commentaire 
+// 2 propriétés
+// contenu string / obligatoire / min 5 caractères 
+// date par défaut la date de maintenant 
+
+// créer deux commentaires (récupérer les id des deux commentaires)
+// créer un article qui avec être associé à un auteur existante et lui associer les deux commentaires que vous venez de créer 
+
+// afficher tous les articles avec auteur associé et commentaires associés 
+
+
+// approche imbriquée (tout stocker dans une seule table)
+// approche hybride
+
+// bon appétit 14h00 @ toute suite !!! 
