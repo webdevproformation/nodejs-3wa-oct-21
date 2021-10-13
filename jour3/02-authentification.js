@@ -1,7 +1,5 @@
 const express = require("express");
 const route = require("./02-route"); // fichier en charge des routes express
-const Joi = require("joi");
-const complexity = require("joi-password-complexity");
 
 require("./02-bdd")(); // connexion à la base de données 
 

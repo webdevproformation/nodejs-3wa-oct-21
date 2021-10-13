@@ -1,13 +1,20 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const User = require("./02-model");
+const profilValid = require("./02-middle-verif-profil");
 
 const route = express.Router() 
 // object { get / post / }
 // 02-authentification.js app.use("/" , route)
 
-route.post("/inscription" , express.json() , async (req, rep) => {
+route.post("/inscription" , express.json()  , async (req, rep) => {
     let profil = req.body ;
+
+    const { value , error } = profilValid(profil);
+
+    if(error){
+        return rep.status(400).send("le mot de passe n'est pas conforme");
+    }
 
     // avant de créer le profil utilisateur => vérifier si il n'y a pas un autre compte qui n'a pas le même login 
     const isUnique = await User.findOne({ login : profil.login });
