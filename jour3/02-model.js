@@ -1,4 +1,6 @@
-const {Schema, model } = require("mongoose")
+const { Schema, model } = require("mongoose")
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 // schema 
 // table dans la base de données => user 
 //  / 
@@ -18,6 +20,14 @@ const schemaUser = new Schema({
         minlength : 5
     }
 });
+
+schemaUser.methods.generateToken = function ()  {
+    const profil = {
+        login : this.login 
+    }
+    const token = jwt.sign ( profil , process.env.SECRET ); // jwt.sign  {} => "jsonwebtoken"
+    return token ; 
+}
 
 const User = model( "users" , schemaUser);
 
