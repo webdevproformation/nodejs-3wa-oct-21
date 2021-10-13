@@ -6,7 +6,6 @@ connect( process.env.BD_HYBRIDE , {useNewUrlParser : true} )
         .then(() => { console.log("connexion effectuée à la base")})
         .catch(erreur => { console.error(new Error( erreur)) })
 
-
 const schemaUtilisateur = new Schema({
     nom : String ,
     role : { type : String , enum : ["admin", "redacteur"]}
@@ -34,7 +33,7 @@ async function creerArticle (utilisateur){
 };
 // creerArticle ( new Utilisateur({ nom : "Pierre",role : "redacteur"}))
 
-// modifier les droits =>  des articles écrits par Alain
+// modifier les droits =>  des articles écrit par Alain
 
 async function update(){
     const resultat = await Utilisateur.updateMany({nom : "Alain"} , { $set : { role : "admin" }})
