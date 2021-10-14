@@ -8,7 +8,6 @@ router.post("/creer-produit" , async ( req, rep , next) => {
         const token = req.header("x-auth");
         const decoder = jwt.verify(token , process.env.SECRET_JWT);
         const { nom , prix } = req.body ;
-
         const nouveauProduit = new Produit ({ 
             nom : nom ,
             prix : prix,

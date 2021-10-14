@@ -1,0 +1,24 @@
+doctype html
+html 
+    head
+        title #{titre} 
+        // interpolation 
+    body
+        header 
+            h1 page complète avec toutes les balises 
+        main 
+            h2 #{titre} 
+            p= contenu 
+            // execution 
+            p= (new Date()).getDate()
+            p= 10 + 2 
+            // <?= ?>
+            p #{meta.auteur}
+            p= meta.like
+            h3 catégories
+            ul 
+                li= categories[0]
+                li #{categories[1]}
+        hr
+        footer 
+            p &copy; 2021
