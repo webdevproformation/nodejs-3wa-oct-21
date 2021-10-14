@@ -1,0 +1,11 @@
+extends back-office
+block tableau-debord
+    h1 je suis la tableau de bord
+    table 
+        tr 
+            th titre
+            th contenu
+        each article in data 
+            tr 
+                td #{article.titre}
+                td #{article.contenu}
