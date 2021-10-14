@@ -75,6 +75,14 @@ app.get("/exo", (req, rep) => {
     rep.render("08-tableau-de-bord" , liste);
 })
 
+app.get("/attributs", (req, rep) => {
+    rep.render("09-attributs");
+})
+
+app.get("/assets", (req, rep) => {
+    rep.render("10-assets");
+})
+
 // créer un nouvelle route /exo => appeler fichier 08-tableau-de-bord.pug
 
 // ce fichier va extends un fichier pug template back-office 
