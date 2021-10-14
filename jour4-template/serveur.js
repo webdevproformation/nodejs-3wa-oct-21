@@ -43,6 +43,31 @@ app.get("/import", (req, rep) => {
     rep.render("04-import" , mentions);
 })
 
+app.get("/extends-block", (req, rep) => {
+    const mentions = {
+        annee : 2012
+    }
+    rep.render("05-extends-block" , mentions);
+})
+
+app.get("/variable-template", (req, rep) => {
+    const produit = {
+        prix : 30
+    }
+    rep.render("06-variable-template" , produit);
+})
+
+app.get("/loop", (req, rep) => {
+    const produits = {
+        produits : [
+            { nom : "produit 1" , prix : 30},
+            { nom : "produit 2" , prix : 50},
+        ]
+    }
+    rep.render("07-loop" , produits);
+})
+
+
 const PORT = process.env.PORT || 5222;
 app.listen(PORT , () => console.log(`serveur express démarré sur le port ${PORT}`));
 

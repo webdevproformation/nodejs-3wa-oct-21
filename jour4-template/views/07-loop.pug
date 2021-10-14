@@ -1,0 +1,18 @@
+extends mise-en-page
+
+block contenu_page
+    h2 1er manière de faire des boucles dans la vue : each et interpolation
+    ul 
+        each produit in produits 
+            li #{produit.nom} - #{produit.prix}
+    h2 2eme manière de faire des boucles dans la vue : each et exécution
+    
+    ul 
+        each produit in produits 
+            li= `${produit.nom} - ${produit.prix}`
+    
+    h2 3eme manière de faire des boucles dans la vue : for et exécution
+    ul 
+        - for(let i = 0 ; i < produits.length ; i++) {
+            li= `${produits[i].nom} - ${produits[i].prix}`
+        - }

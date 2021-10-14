@@ -1,0 +1,21 @@
+extends mise-en-page
+
+block contenu_page
+    // créer des variables directement dans la vue 
+    - const titre = "je suis un titre" ;
+    - const p = "je suis le contenu de la page" ;
+    h2 #{titre}
+    p= p
+    // concaténation dans votre balise
+    // interpolation #{}
+    hr
+    p bonjour les amis, #{titre}
+    // exécuter => template string ``
+    hr
+    p= `bonjour les amis ${p}`
+    // exécuter => concaténation avec le symbole + et guillemets
+    hr
+    p= "autre phrases " + p
+    hr
+    - const prixTTC = prix * 1.2 ;
+    p le prix total est #{prixTTC}

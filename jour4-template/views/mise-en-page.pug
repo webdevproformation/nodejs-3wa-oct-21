@@ -1,0 +1,16 @@
+doctype html
+html 
+    head
+        title Page complète 
+        block style
+        // block est un mot clé de pug suivi d'un mot clé 
+    body
+        header 
+            h1 page complète avec toutes les balises 
+        block contenu_page 
+        hr
+        block pied-page
+            // si le fichier qui extends ne définit le block
+            p le pied de page par défaut
+            // possible de définir du html par défaut
+            // si dans extends on ne met pas ce block
