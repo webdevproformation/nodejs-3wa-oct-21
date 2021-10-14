@@ -1,0 +1,28 @@
+extends ../commun/layout-front
+
+block contenu_page
+    h1 Ajouter un nouvel article 
+
+    form
+        div.form-group.mb-3
+            input(type="text" class="form-control" id="titre" placeholder="votre titre" name="titre")
+        div.form-group.mb-3
+            textarea(id="contenu" class="form-control" placeholder="votre contenu" name="contenu")
+        div.form-group
+            input(type="submit" class="btn btn-success")
+
+block script_js
+    script.
+        document.querySelector("form").addEventListener("submit" , (e) => {
+            e.preventDefault();
+            const article = {
+                titre : e.target.titre.value,
+                contenu : e.target.contenu.value
+            }
+            const req = new XMLHttpRequest();
+            req.open("POST" , "http://localhost:5200/back/add-article");
+            req.onload = () => {
+                console.log(req.responseText)
+            }
+            req.send(JSON.stringify(article));
+        })
