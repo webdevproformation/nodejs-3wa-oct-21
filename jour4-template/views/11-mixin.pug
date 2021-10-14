@@ -1,0 +1,13 @@
+extends mise-en-page 
+
+mixin article( titre , contenu )
+    article 
+        h2 #{titre} 
+        p #{contenu}
+        hr
+    // permet de créer un block de html que l'on pourra utiliser pour éviter de se répéter
+
+block contenu_page
+    +article(data[0].titre , data[0].contenu)
+    +article(data[1].titre , data[1].contenu)
+    +article(data[2].titre , data[2].contenu)
