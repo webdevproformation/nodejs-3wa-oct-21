@@ -6,8 +6,8 @@ const bcrypt = require("bcrypt");
 const router = Router()
 
 // CREATE
-router.post("/creation" ,   async ( req, rep ,next ) => {
-    try{
+router.post("/creation" ,   asyncTryCatch ( async ( req, rep ,next ) => {
+
         const { email , password , role } = req.body ;
         //return rep.json(req.body);
         
@@ -28,11 +28,7 @@ router.post("/creation" ,   async ( req, rep ,next ) => {
         const creer = new User(nouveauProfil)
         const reponse = await creer.save();
         rep.json(reponse);
-    }
-    catch(ex){
-        next(ex)
-    }
-})
+}))
 
 router.post("/connection" , async ( req, rep , next ) => {
     try{

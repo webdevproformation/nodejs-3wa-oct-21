@@ -3,7 +3,7 @@
 module.exports = function asyncTryCatch (traitement){
    return async (req, rep, next) => {
         try{
-            await traitement();
+            await traitement(req, rep , next);
         }
         catch(ex){
             next(ex) ;

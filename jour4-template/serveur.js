@@ -5,7 +5,6 @@
 // mkdir public views
 
 const express = require("express"); 
-const pug = require("pug");
 const app = express();
 
 app.set("views","views"); // permet de dire à express où chercher les fichiers de vue 
@@ -35,6 +34,13 @@ app.get("/variables" , (req, rep) => {
         categories : ["node", "js", "angular"]
     }
     rep.render("03-variables" , contenu);
+})
+
+app.get("/import", (req, rep) => {
+    const mentions = {
+        annee : 2012
+    }
+    rep.render("04-import" , mentions);
 })
 
 const PORT = process.env.PORT || 5222;
