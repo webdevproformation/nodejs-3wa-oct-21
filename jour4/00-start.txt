@@ -1,0 +1,28 @@
+https://github.com/webdevproformation/nodejs-3wa-sept-21
+
+https://github.com/webdevproformation/nodejs-3wa-oct-21
+
+
+factorisation du code + 
+le système d'authentification via clé de type JSON web token ?? 
+
+
+dans une nouvelle base mongoDB => jour4 
+
+deux collections 
+produits => 
+    nom string min 5 lettres obligatoire / 
+    prix chiffre > 0 obligatoire
+    ref vers l'id de l'utilisateur qui l'a créé
+users 
+    email string  obligatoire / 
+    password string  obligatoire / 
+    role string enum : admin / redacteur  
+
+mettre en place 3 routes 
+    créer un compte => /creation => POST 3 email / passorwd / role 
+    se connecter => /connection => POST email / password 
+
+    créer un produit => / creer-produit => POST + entête http personnalise 
+                x-auth = JSON Web Token généré depuis nom utilisateur + role + _id 
+

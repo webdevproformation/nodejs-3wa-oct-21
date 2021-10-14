@@ -20,7 +20,13 @@ route.get("/utilisateur" , (req, rep) => {
     }catch(ex){
         return rep.status(403).send("vous n'êtes pas autorisé à accéder à cette page");
     }
-    
 })
 
 module.exports = route ;
+
+// demain
+// autre stratégie d'authentification 
+// pug 
+
+// vendredi
+// mettre en ligne sur heroku 
