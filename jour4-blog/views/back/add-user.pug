@@ -20,13 +20,15 @@ block script_js
     // envoyer en ajax 
     // appeler l'adresse http://localhost:5200/back/add-user 
     // méthode POST 
+    script(src="https://cdn.jsdelivr.net/npm/js-sha1@0.6.0/src/sha1.min.js")
     script.
         document.querySelector("form").addEventListener("submit" , (e) => {
             e.preventDefault();
             const profil = {
                 login : e.target.login.value,
-                password : e.target.password.value,
+                password : sha1(e.target.password.value),
             }
+            console.log(profil);
             const req = new XMLHttpRequest()
             req.open("POST" , "http://localhost:5200/back/add-user/");
             req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')

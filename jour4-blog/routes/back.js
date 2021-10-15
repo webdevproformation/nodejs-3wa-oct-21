@@ -68,7 +68,11 @@ router.get("/add-user" , (req,rep) => {
 })
 
 router.post("/add-user" , express.json(), (req,rep) => {
-    rep.json(req.body);
+    rep.json(req.body); 
+    // https
+    // bcrypt()
+
+    // vérifier que l'utilisateur 
 })
 
 
