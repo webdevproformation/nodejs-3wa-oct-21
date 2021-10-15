@@ -1,0 +1,1 @@
+alert("je suis le fichier script.js");

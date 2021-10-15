@@ -9,3 +9,5 @@ modifier le fichier routes/front.js =>
 modifier views/front/index.js 
 
 - faire une boucle pug each pour afficher tous les articles dans cette page 
+
+// rdv 11h15 @ toute suite !

@@ -1,4 +1,11 @@
 extends ../commun/layout-front
 
 block contenu_page 
-    h1 je suis la page d'accueil
+    h1 je suis la page d'accueil #{www}
+    each article in articles 
+        article.border.border-secondary.py-3.my-1.rounded
+            h2 #{ article.titre } 
+            div #{ article.contenu }
+            div 
+                - const lien = { href : `${www}${article._id}` , class : ["btn", "btn-dark", "btn-sm", "mt-3"] }
+                a&attributes(lien) laisser un commentaire
