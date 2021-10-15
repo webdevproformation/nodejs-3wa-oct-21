@@ -1,0 +1,11 @@
+cas pratique : afficher les articles dans la page d'accueil 
+
+modifier le fichier routes/front.js => 
+
+- récupérer l'ensemble des articles de la collection articles qui est dans la base jour5 
+- récupérer le modèle Article.find()
+- envoyer le tableau à la vue 
+
+modifier views/front/index.js 
+
+- faire une boucle pug each pour afficher tous les articles dans cette page 
