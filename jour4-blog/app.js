@@ -9,6 +9,8 @@ const app = express();
 const frontRoutes = require("./routes/front")
 const backRoutes = require("./routes/back")
 
+require("./start/bdd")(); 
+
 app.set("views", "views");
 app.set(express.static("assets") );
 app.set("view engine", "pug");

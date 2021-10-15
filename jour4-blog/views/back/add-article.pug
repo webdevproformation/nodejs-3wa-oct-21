@@ -10,6 +10,7 @@ block contenu_page
             textarea(id="contenu" class="form-control" placeholder="votre contenu" name="contenu")
         div.form-group
             input(type="submit" class="btn btn-success")
+    .message
 
 block script_js
     script.
@@ -21,8 +22,27 @@ block script_js
             }
             const req = new XMLHttpRequest();
             req.open("POST" , "http://localhost:5200/back/add-article");
+            // POST coté client => entête le type / format de contenu que l'on va envoyer
+            req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
             req.onload = () => {
-                console.log(req.responseText)
+                const message = document.querySelector(".message")
+                if(req.status === 200){
+                    e.target.reset() // vider le formulaire 
+                    // affiche un message de success 
+                    message.innerHTML = `<div class="alert alert-success my-3">article bien enregistré</div>`
+                    setTimeout(() => {
+                            message.innerHTML = "";
+                    } , 2000)
+                    return ;
+                }
+                const { error } = JSON.parse(req.responseText);
+                const erreurs = error.map((element) => { return `<div>${element}</div>` }).join("")
+                message.innerHTML = `<div class="alert alert-danger my-3">${erreurs}</div>`;
+
+                setTimeout(() => {
+                        message.innerHTML = "";
+                } , 2000)
             }
+            // il faut que l'objet soit sous format string lorsqu'il va être envoyé sur un réseau
             req.send(JSON.stringify(article));
         })
