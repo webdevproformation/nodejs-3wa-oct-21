@@ -14,10 +14,23 @@ html
                         li.nav-item
                              a(href="/contact" class="nav-link") Contact
                     ul.navbar-nav.ms-auto
-                        li.nav-item 
+                        li.nav-item.not-logged
                              a(href="/connexion" class="nav-link") Connexion
-                        li.nav-item
-                             a(href="/back/add-user" class="nav-link") Créer User
+                        li.nav-item.logged
+                            a(href="/back/add-user" class="nav-link") Créer User
+                        li.nav-item.logged
+                            a(href="/back/add-article" class="nav-link") Créer Article
+                        li.nav-item.logged.deconnexion
+                           span.nav-link  Déconnexion
+            script. 
+                if(localStorage.getItem("x-auth")){
+                    document.querySelectorAll(".not-logged").forEach(item => item.remove())
+                }else {
+                     document.querySelectorAll(".logged").forEach(item => item.remove())
+                }
+                document.querySelector(".deconnexion").addEventListener("click" , e => {
+                    localStorage.removeItem('x-auth')
+                })
             main.row 
                 block contenu_page 
             footer.row 

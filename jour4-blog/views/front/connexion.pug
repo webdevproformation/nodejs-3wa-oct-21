@@ -37,6 +37,17 @@ block script_js
             req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
             req.send(JSON.stringify(profil))
             req.onload = () => {
+                if(req.status === 200){
+                    const h = req.getResponseHeader("x-auth")
+                    localStorage.setItem("x-auth" , h )
+                    // propriété de window comme document 
+                    // window.localStorage
+                    
+                    // version moderne des cookies de session 
+                    // fichier qui contient ID => cookie 
+                    // serveur fichier qui a comme nom ID => contenu les informations 
+                    // 
+                }
                 console.log(JSON.parse(req.responseText))
             }
         })
