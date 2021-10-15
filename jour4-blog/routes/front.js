@@ -1,6 +1,9 @@
 const { Router }= require("express");
 const Articles = require("../model/article");
 const {Types} = require("mongoose");
+const User = require("../model/user");
+const bcrypt = require("bcrypt");
+const express = require("express");
 
 const router = Router();
 router.get("/" , async (req, rep) => {
@@ -21,6 +24,28 @@ router.get("/404", (req, rep) => {
 
 router.get("/connexion" , (req, rep) => {
     rep.render("front/connexion");
+})
+
+router.post("/connexion" , express.json() , async (req, rep) => {
+    // vérifier si l'utilisateur existe ?? 
+    const {login , password} = req.body;
+    
+    if(!login){
+        return rep.status(400).json({error : "veuillez fournir un login"})
+    }    // si oui jsonwebtoken
+
+    const profilRecherche = await User.findOne({login});
+    if(profilRecherche === null){
+        return rep.status(404).json({error : "aucun profil trouvé"})
+    }
+
+    bcrypt.compare(password , profilRecherche.password , (err , resultat) => {
+        if(resultat){
+           return rep.json({success : "Welcome"})
+        }
+        return rep.status(404).json({error : "password invalid"})
+    }  )
+
 })
 
 // route à mettre à la fin des autres routes 
