@@ -1,0 +1,40 @@
+extends ../commun/layout-front
+
+block contenu_page
+    h1.mb-5 Ajouter un nouveau profil utilisateur
+    // créer un formulaire qui contient 2 champs 
+    // login 
+    // password 
+    // button de soumission 
+    form 
+        .form-group
+            input(type="text" name="login" class="form-control"  placeholder="login")
+        .form-group
+            input(type="text" name="password" class="form-control my-3"  placeholder="password")
+        .form-group.d-flex.justify-content-end
+            input(type="submit" class="btn btn-success btn-lg" value="créer")
+    .message
+
+block script_js
+    // le script lorsque vous soumettre le formulaire 
+    // envoyer en ajax 
+    // appeler l'adresse http://localhost:5200/back/add-user 
+    // méthode POST 
+    script.
+        document.querySelector("form").addEventListener("submit" , (e) => {
+            e.preventDefault();
+            const profil = {
+                login : e.target.login.value,
+                password : e.target.password.value,
+            }
+            const req = new XMLHttpRequest()
+            req.open("POST" , "http://localhost:5200/back/add-user/");
+            req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
+            req.send(JSON.stringify(profil))
+            req.onload = () => {
+                console.log(JSON.parse(req.responseText))
+            }
+        })
+
+
+    

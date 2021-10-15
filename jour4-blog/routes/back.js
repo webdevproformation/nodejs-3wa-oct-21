@@ -63,5 +63,13 @@ router.post("/add-commentaire", express.json() , async (req, rep) => {
     }
 })
 
+router.get("/add-user" , (req,rep) => {
+    rep.render("back/add-user");
+})
+
+router.post("/add-user" , express.json(), (req,rep) => {
+    rep.json(req.body);
+})
+
 
 module.exports = router ;

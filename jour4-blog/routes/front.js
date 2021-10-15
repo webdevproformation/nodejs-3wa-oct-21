@@ -19,6 +19,10 @@ router.get("/404", (req, rep) => {
     rep.render("front/404");
 });
 
+router.get("/connexion" , (req, rep) => {
+    rep.render("front/connexion");
+})
+
 // route à mettre à la fin des autres routes 
 router.get("/:id" , async (req, rep) => {
     try{

@@ -48,7 +48,6 @@ block script_js
             const req = new XMLHttpRequest();
             req.open("POST" , "http://localhost:5200/back/add-commentaire")
             req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
-
             req.onload = () => {
                 const message = document.querySelector(".message")
                 const listeCommentaire = document.querySelector(".liste-commentaire")
@@ -67,7 +66,7 @@ block script_js
                     return ;
                 }
                 const { error } = JSON.parse(req.responseText);
-                const erreurs = error.map((element) => { return `<div>${element}</div>` }).join("")
+                const erreurs = error.map((element) => `<div>${element}</div>`).join("")
                 message.innerHTML = `<div class="alert alert-danger my-3">${erreurs}</div>`;
                 setTimeout(() => {
                         message.innerHTML = "";
