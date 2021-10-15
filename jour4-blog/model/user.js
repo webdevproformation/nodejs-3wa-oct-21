@@ -9,7 +9,7 @@ const schemaUser = new Schema({
 
 schemaUser.methods.genererJWT = function(){
     const profil = {
-        _id = this._id,
+        _id : this._id,
         login : this.login
     }
     return jwt.sign(profil , process.env.JWT_SECRET)

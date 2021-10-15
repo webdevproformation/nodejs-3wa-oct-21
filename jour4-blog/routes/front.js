@@ -41,7 +41,11 @@ router.post("/connexion" , express.json() , async (req, rep) => {
 
     bcrypt.compare(password , profilRecherche.password , (err , resultat) => {
         if(resultat){
-           return rep.json({success : "Welcome"})
+            const token = profilRecherche.genererJWT();
+
+           return rep.header("x-auth" , token)
+                     .header("access-control-expose-headers" , "x-auth" )
+                     .json({success : "Welcome"})
         }
         return rep.status(404).json({error : "password invalid"})
     }  )
