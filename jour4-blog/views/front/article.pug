@@ -21,13 +21,17 @@ block contenu_page
         input(type="submit" class="btn btn-outline-dark btn-sm my-3")
     .message 
     .liste-commentaire 
-        - if(article.commentaires.length > 0){
+        - if(article.commentaires != undefined && article.commentaires.length > 0){
             h3 liste des commentaires :
             each commentaire in article.commentaires
                 div.border.border-primary.rounded.my-3.p-2
                     p #{commentaire.email} 
                     p #{commentaire.commentaire}
         - }
+        // rdv 14h18 pour la suite 
+        // live ajout des commentaires dans la page article 
+        // formulaire connexion au back json web token => localStorage du client (navigateur)
+        // 
 
 block script_js
     // script(src="script.js")
@@ -46,7 +50,28 @@ block script_js
             req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')
 
             req.onload = () => {
-                console.log(req.responseText);
+                const message = document.querySelector(".message")
+                const listeCommentaire = document.querySelector(".liste-commentaire")
+                if(req.status === 200){
+                    const html = `<div class="alert alert-success">commentaire publié</div>`;
+                    message.innerHTML = html ;
+                    setTimeout(() => {
+                        message.innerHTML = "";
+                    } , 2000)
+                    const htmlCommentaire = `<div class="border border-primary rounded my-3 p-2">
+                            <p>${commentaire.email}</p>
+                            <p>${commentaire.commentaire}</p>
+                        </div>`
+                    listeCommentaire.insertAdjacentHTML('beforeend' , htmlCommentaire);
+                    e.target.reset();
+                    return ;
+                }
+                const { error } = JSON.parse(req.responseText);
+                const erreurs = error.map((element) => { return `<div>${element}</div>` }).join("")
+                message.innerHTML = `<div class="alert alert-danger my-3">${erreurs}</div>`;
+                setTimeout(() => {
+                        message.innerHTML = "";
+                } , 2000)
             }
 
             req.send(JSON.stringify(commentaire))
