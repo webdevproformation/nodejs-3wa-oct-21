@@ -28,7 +28,6 @@ block script_js
                 login : e.target.login.value,
                 password : sha1(e.target.password.value),
             }
-            console.log(profil);
             const req = new XMLHttpRequest()
             req.open("POST" , "http://localhost:5200/back/add-user/");
             req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8')

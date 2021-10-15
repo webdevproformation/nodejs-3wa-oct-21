@@ -2,6 +2,8 @@ const { Router }= require("express");
 const express = require("express");
 const Article = require("../model/article");
 const {Types} = require("mongoose");
+const User = require("../model/user");
+const bcrypt = require("bcrypt");
 
 const router = Router();
 router.get("/add-article" , (req, rep) => {
@@ -67,12 +69,33 @@ router.get("/add-user" , (req,rep) => {
     rep.render("back/add-user");
 })
 
-router.post("/add-user" , express.json(), (req,rep) => {
-    rep.json(req.body); 
-    // https
-    // bcrypt()
-
-    // vérifier que l'utilisateur 
+router.post("/add-user" , express.json(), async (req,rep) => {
+    try{
+        const { login , password } = req.body ;
+         // vérifier si le login proposé n'est pas déjà enregistré dans la balise de données 
+        if(!login){
+            return rep.status(400).json({error : "veuillez donner un login "})
+        }
+        // si le login est unique alors 
+        // hasher le passort et l'enregistrer en base de données 
+        const profilRecherche = await User.findOne({login : login}) // null 
+        if(profilRecherche !== null){
+            return rep.status(400).json({error : "le login est déjà utilisé"})
+        }
+        // npm i bcrypt
+        const salt = await bcrypt.genSalt()
+        const passwordHashed = await bcrypt.hash( password , salt );
+        const creer = new User({ login , password : passwordHashed })
+        const resultat = await creer.save();
+        rep.send({success : resultat});
+    }
+    catch(ex){
+        const erreurs = []
+        for(let champ in ex.errors){
+            erreurs.push(ex.errors[champ].message);
+        }
+        rep.status(400).json({error : erreurs})
+    }
 })
 
 
